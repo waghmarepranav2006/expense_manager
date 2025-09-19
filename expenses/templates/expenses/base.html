@@ -22,18 +22,18 @@
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        nav a, nav form button {
+        nav a, .nav-right form button {
             margin-right: 1em;
             text-decoration: none;
             color: #007bff;
             font-weight: 500;
             transition: color 0.2s, transform 0.2s;
         }
-        nav a:hover, nav form button:hover {
+        nav a:hover {
             color: #0056b3;
             transform: translateY(-2px);
         }
-        nav form button {
+        .nav-right form button {
             background: none;
             border: none;
             cursor: pointer;
@@ -134,6 +134,11 @@
         }
         button[type="submit"]:hover {
             background-color: #0056b3;
+        }
+
+        .nav-right form button:hover {
+            background-color: transparent; /* The real fix */
+            color: #0056b3;
         }
 
         .btn-sm {

@@ -2,16 +2,22 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.validators import MinLengthValidator
 from .models import Expense
 
 
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=False)
+    username = forms.CharField(
+        max_length=30,
+        validators=[MinLengthValidator(8)],
+        help_text='Required. 8-30 characters long. Allowed characters are letters, numbers, and @/./+/-/_ symbols.'
+    )
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name',)
+        fields = ('username', 'first_name', 'last_name',)
 
 
 class ExpenseForm(forms.ModelForm):
