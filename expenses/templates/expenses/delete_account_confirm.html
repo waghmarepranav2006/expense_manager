@@ -1,0 +1,12 @@
+{% extends 'expenses/base.html' %}
+{% block content %}
+    <div class="card">
+        <h2>Confirm Account Deletion</h2>
+        <p>Are you sure you want to delete your account? This action cannot be undone, and all your data will be permanently lost.</p>
+        <form method="post" style="display: flex; gap: 1em; align-items: center;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-delete">Yes, Delete My Account</button>
+            <a href="{% url 'view_expenses' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}
