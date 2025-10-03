@@ -1,10 +1,12 @@
 {% extends 'expenses/base.html' %}
 {% block content %}
-    <h2>Confirm Deletion</h2>
-    <p>Are you sure you want to delete the expense for "{{ expense.category }}" of ₹{{ expense.amount }} on {{ expense.date }}?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-        <a href="{% url 'view_expenses' %}">Cancel</a>
-    </form>
+    <div class="card form-container">
+        <h2>Confirm Deletion</h2>
+        <p>Are you sure you want to delete the expense for "{{ expense.category }}" of ₹{{ expense.amount }} on {{ expense.date }}?</p>
+        <form method="post" style="display: flex; gap: 1em; align-items: center;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-delete">Yes, Delete</button>
+            <a href="{% url 'view_expenses' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
 {% endblock %}
