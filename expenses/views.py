@@ -8,6 +8,8 @@ from .forms import ExpenseForm, CustomUserCreationForm
 from django.shortcuts import get_object_or_404
 from django.db.models import Sum
 import json
+import csv
+from django.http import HttpResponse
 
 
 def signup_view(request):
@@ -83,6 +85,20 @@ def view_expenses(request):
     }
 
     return render(request, 'expenses/view_expenses.html', context)
+
+@login_required
+def export_to_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="expenses.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Date', 'Category', 'Amount', 'Description'])
+
+    expenses = Expense.objects.filter(user=request.user).order_by('-date')
+    for expense in expenses:
+        writer.writerow([expense.date, expense.category, expense.amount, expense.description])
+
+    return response
 
 
 # Add Expense (REQ-4 to REQ-6) [cite: 99, 100, 102]

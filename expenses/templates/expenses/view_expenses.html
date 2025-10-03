@@ -19,8 +19,9 @@
                 <label>End Date:</label>
                 <input type="date" name="end_date" value="{{ request.GET.end_date }}">
             </div>
-            <div style="align-self: flex-end;">
+            <div style="align-self: flex-end; display: flex; gap: 1em;">
                 <button type="submit">Filter</button>
+                <a href="{% url 'export_to_csv' %}" class="btn btn-secondary">Export to CSV</a>
             </div>
         </div>
     </form>
