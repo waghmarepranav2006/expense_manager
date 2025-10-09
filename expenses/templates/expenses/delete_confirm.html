@@ -5,8 +5,8 @@
         <p>Are you sure you want to delete the expense for "{{ expense.category }}" of ₹{{ expense.amount }} on {{ expense.date }}?</p>
         <form method="post" style="display: flex; gap: 1em; align-items: center;">
             {% csrf_token %}
-            <button type="submit" class="btn btn-delete">Yes, Delete</button>
-            <a href="{% url 'view_expenses' %}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i>Yes, Delete</button>
+            <a href="{% url 'view_expenses' %}" class="btn btn-secondary"><i class="fas fa-ban"></i>Cancel</a>
         </form>
     </div>
 {% endblock %}

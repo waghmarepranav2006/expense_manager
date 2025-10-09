@@ -3,25 +3,25 @@
     <h2>My Expenses</h2>
 
     <form method="get" class="card">
-        <div style="display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
-            <div>
-                <label>Category:</label>
-                <select name="category">
+        <div style="display: flex; align-items: flex-end; gap: 1em; flex-wrap: wrap;">
+            <div class="filter-form">
+                <label for="category">Category:</label>
+                <select name="category" id="category">
                     <option value="">All</option>
                     {% for c in categories %}<option value="{{ c }}" {% if request.GET.category == c %}selected{% endif %}>{{ c }}</option>{% endfor %}
                 </select>
             </div>
-            <div>
-                <label>Start Date:</label>
-                <input type="date" name="start_date" value="{{ request.GET.start_date }}">
+            <div class="filter-form">
+                <label for="start_date">Start Date:</label>
+                <input type="date" name="start_date" id="start_date" value="{{ request.GET.start_date }}">
             </div>
-            <div>
-                <label>End Date:</label>
-                <input type="date" name="end_date" value="{{ request.GET.end_date }}">
+            <div class="filter-form">
+                <label for="end_date">End Date:</label>
+                <input type="date" name="end_date" id="end_date" value="{{ request.GET.end_date }}">
             </div>
-            <div style="align-self: flex-end; display: flex; gap: 1em;">
-                <button type="submit">Filter</button>
-                <a href="{% url 'export_to_csv' %}" class="btn btn-secondary">Export to CSV</a>
+            <div style="display: flex; gap: 1em;">
+                <button type="submit"><i class="fas fa-filter"></i>Filter</button>
+                <a href="{% url 'export_to_csv' %}" class="btn btn-secondary"><i class="fas fa-file-csv"></i>Export to CSV</a>
             </div>
         </div>
     </form>
@@ -35,8 +35,8 @@
                     {% if expense.description %}<p style="margin-top: 0.5em;">{{ expense.description }}</p>{% endif %}
                 </div>
                 <div style="display: flex; gap: 0.5em;">
-                    <a href="{% url 'edit_expense' expense.id %}" class="btn btn-sm btn-edit">Edit</a>
-                    <a href="{% url 'delete_expense' expense.id %}" class="btn btn-sm btn-delete">Delete</a>
+                    <a href="{% url 'edit_expense' expense.id %}" class="btn btn-sm btn-edit"><i class="fas fa-pencil-alt"></i>Edit</a>
+                    <a href="{% url 'delete_expense' expense.id %}" class="btn btn-sm btn-delete"><i class="fas fa-trash"></i>Delete</a>
                 </div>
             </div>
         </div>
