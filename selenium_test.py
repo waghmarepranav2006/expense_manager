@@ -12,8 +12,8 @@ try:
     driver.get("http://127.0.0.1:8000/login/")
     
     # 2. Perform actions: enter credentials and click login
-    driver.find_element(By.NAME, "username").send_keys("admin")
-    driver.find_element(By.NAME, "password").send_keys("yourpassword")
+    driver.find_element(By.NAME, "username").send_keys("pranavwaghmare")
+    driver.find_element(By.NAME, "password").send_keys("ilovemai")
     driver.find_element(By.XPATH, "//button[@type='submit']").click()
     
     # 3. Verify success
