@@ -149,24 +149,15 @@ else:
 USE_CLOUDWATCH = os.environ.get('USE_CLOUDWATCH') == 'True'
 if USE_CLOUDWATCH:
     import watchtower
+    import boto3
+    
+    # Initialize boto3 client with explicit region to avoid NoRegionError on EC2
+    aws_region = os.getenv('AWS_DEFAULT_REGION', os.getenv('AWS_S3_REGION_NAME', 'us-east-1'))
+    boto3_logs_client = boto3.client("logs", region_name=aws_region)
+
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,
-        'handlers': {
-            'watchtower': {
-                'level': 'INFO',
-                'class': 'watchtower.CloudWatchLogHandler',
-                'log_group_name': 'expense_manager_production_logs',
-                'stream_name': 'app-{strftime:%Y-%m-%d}',
-            },
-        },
-        'loggers': {
-            'django': {
-                'handlers': ['console', 'watchtower'],
-                'level': 'INFO',
-                'propagate': True,
-            },
-        },
         'formatters': {
             'verbose': {
                 'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
@@ -181,8 +172,16 @@ if USE_CLOUDWATCH:
             'watchtower': {
                 'level': 'INFO',
                 'class': 'watchtower.CloudWatchLogHandler',
+                'boto3_client': boto3_logs_client,
                 'log_group_name': 'expense_manager_production_logs',
                 'stream_name': 'app-{strftime:%Y-%m-%d}',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['console', 'watchtower'],
+                'level': 'INFO',
+                'propagate': True,
             },
         },
     }
