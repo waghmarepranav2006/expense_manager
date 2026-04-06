@@ -156,9 +156,8 @@ if USE_CLOUDWATCH:
             'watchtower': {
                 'level': 'INFO',
                 'class': 'watchtower.CloudWatchLogHandler',
-                'boto3_session': None,
                 'log_group_name': 'expense_manager_production_logs',
-                'log_stream_name': 'app-{strftime:%Y-%m-%d}',
+                'stream_name': 'app-{strftime:%Y-%m-%d}',
             },
         },
         'loggers': {
@@ -182,9 +181,8 @@ if USE_CLOUDWATCH:
             'watchtower': {
                 'level': 'INFO',
                 'class': 'watchtower.CloudWatchLogHandler',
-                'boto3_session': None,
                 'log_group_name': 'expense_manager_production_logs',
-                'log_stream_name': 'app-{strftime:%Y-%m-%d}',
+                'stream_name': 'app-{strftime:%Y-%m-%d}',
             },
         },
     }
