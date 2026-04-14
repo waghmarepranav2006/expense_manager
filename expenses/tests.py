@@ -36,24 +36,24 @@ class ExpenseManagerTests(TestCase):
         response = self.client.post(reverse('add_expense'), {
             'date': datetime.date.today(),
             'amount': 100,
-            'category': 'Test',
+            'category': 'Food',
             'description': 'Test expense'
         }, follow=True)
         self.assertRedirects(response, reverse('view_expenses'))
-        self.assertTrue(Expense.objects.filter(user=self.user, category='Test').exists())
+        self.assertTrue(Expense.objects.filter(user=self.user, category='Food', amount=100).exists())
 
     def test_edit_expense(self):
         expense = Expense.objects.create(user=self.user, date=datetime.date.today(), amount=50, category='Food')
         response = self.client.post(reverse('edit_expense', args=[expense.id]), {
             'date': datetime.date.today(),
             'amount': 75,
-            'category': 'Groceries',
+            'category': 'Bills',
             'description': 'Updated expense'
         }, follow=True)
         self.assertRedirects(response, reverse('view_expenses'))
         expense.refresh_from_db()
         self.assertEqual(expense.amount, 75)
-        self.assertEqual(expense.category, 'Groceries')
+        self.assertEqual(expense.category, 'Bills')
 
     def test_delete_expense(self):
         expense = Expense.objects.create(user=self.user, date=datetime.date.today(), amount=50, category='Transport')
