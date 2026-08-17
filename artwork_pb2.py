@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rartwork.proto\x12\x14\x65xpense_manager.grpc\"3\n\rAccessRequest\x12\x0f\n\x07node_id\x18\x01 \x01(\x05\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\"1\n\x0b\x41\x63\x63\x65ssReply\x12\x0f\n\x07node_id\x18\x01 \x01(\x05\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\x32g\n\x0cMutexService\x12W\n\rRequestAccess\x12#.expense_manager.grpc.AccessRequest\x1a!.expense_manager.grpc.AccessReplyb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rartwork.proto\x12\x14\x65xpense_manager.grpc\"3\n\rAccessRequest\x12\x0f\n\x07node_id\x18\x01 \x01(\x05\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\"1\n\x0b\x41\x63\x63\x65ssReply\x12\x0f\n\x07node_id\x18\x01 \x01(\x05\x12\x11\n\ttimestamp\x18\x02 \x01(\x05\"H\n\x0bLockRequest\x12\x13\n\x0bresource_id\x18\x01 \x01(\t\x12\x11\n\tholder_id\x18\x02 \x01(\x05\x12\x11\n\ttimestamp\x18\x03 \x01(\x05\"-\n\tLockReply\x12\x0f\n\x07granted\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t2g\n\x0cMutexService\x12W\n\rRequestAccess\x12#.expense_manager.grpc.AccessRequest\x1a!.expense_manager.grpc.AccessReply2\xb3\x01\n\x0bLockService\x12Q\n\x0b\x41\x63quireLock\x12!.expense_manager.grpc.LockRequest\x1a\x1f.expense_manager.grpc.LockReply\x12Q\n\x0bReleaseLock\x12!.expense_manager.grpc.LockRequest\x1a\x1f.expense_manager.grpc.LockReplyb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,6 +35,12 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_ACCESSREQUEST']._serialized_end=90
   _globals['_ACCESSREPLY']._serialized_start=92
   _globals['_ACCESSREPLY']._serialized_end=141
-  _globals['_MUTEXSERVICE']._serialized_start=143
-  _globals['_MUTEXSERVICE']._serialized_end=246
+  _globals['_LOCKREQUEST']._serialized_start=143
+  _globals['_LOCKREQUEST']._serialized_end=215
+  _globals['_LOCKREPLY']._serialized_start=217
+  _globals['_LOCKREPLY']._serialized_end=262
+  _globals['_MUTEXSERVICE']._serialized_start=264
+  _globals['_MUTEXSERVICE']._serialized_end=367
+  _globals['_LOCKSERVICE']._serialized_start=370
+  _globals['_LOCKSERVICE']._serialized_end=549
 # @@protoc_insertion_point(module_scope)
