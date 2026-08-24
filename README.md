@@ -72,6 +72,41 @@ Follow these steps to set up the project locally.
     Open your web browser and navigate to:
     `http://127.0.0.1:8000/`
 
+    ## Least-Connections gRPC Experiment
+
+    This repository also contains a standalone load-balancing experiment. It uses
+    `proto/worker.proto` so the existing expense workflow contract in
+    `proto/service.proto` remains unchanged.
+
+    Generate the worker stubs from the project root:
+
+    ```powershell
+    .\venv\Scripts\python.exe -m grpc_tools.protoc -I=proto --python_out=. --grpc_python_out=. proto/worker.proto
+    ```
+
+    Open four terminals with the virtual environment activated. Start one worker
+    in each of the first three terminals:
+
+    ```powershell
+    python worker_server.py 60201
+    python worker_server.py 60202
+    python worker_server.py 60203
+    ```
+
+    After all workers report that they are listening, run the load balancer in the
+    fourth terminal:
+
+    ```powershell
+    python load_balancer.py
+    ```
+
+    The balancer reserves the least-loaded backend before dispatching each request
+    and releases that reservation in a `finally` block. Run its focused tests with:
+
+    ```powershell
+    python -m unittest -v test_load_balancer.py
+    ```
+
 ## 📂 Project Structure
 
 ```text
